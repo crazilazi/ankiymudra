@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { elastic as Menu, Props } from "react-burger-menu";
-import { FaBeer } from 'react-icons/fa';
+import { FiRefreshCw } from 'react-icons/fi';
+import Button from 'reactstrap/lib/Button';
 import "src/common/components/sidebar/index.css";
 
 // tslint:disable-next-line:no-empty-interface
 export interface ISideBarProps extends Props {
-
+    refreshClick(event: any): void;
 }
 
 // tslint:disable-next-line:no-empty-interface
@@ -13,7 +14,7 @@ export interface ISideBarState {
 
 }
 
-class SideBar extends React.Component<Props> {
+class SideBar extends React.Component<ISideBarProps> {
     // public readonly props: Readonly<Props>;
     constructor(props: ISideBarProps) {
         super(props);
@@ -22,21 +23,10 @@ class SideBar extends React.Component<Props> {
     public render() {
         return ( // Pass on our props
             <Menu {...this.props} noOverlay>
-                <a className="menu-item" href="/">
-                    Home<FaBeer />
-              </a>
-
-                <a className="menu-item" href="/burgers">
-                    Burgers
-              </a>
-
-                <a className="menu-item" href="/pizzas">
-                    Pizzas
-              </a>
-
-                <a className="menu-item" href="/desserts">
-                    Desserts
-              </a>
+             <Button color="primary" className="menu-item"
+              onClick={(e: any) => this.props.refreshClick(e)}
+             >Refresh <FiRefreshCw /></Button>
+            
             </Menu>);
     }
 }

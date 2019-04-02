@@ -3,6 +3,7 @@ import * as React from 'react';
 import NumberFormat from 'react-number-format';
 import { Link } from 'react-router-dom';
 import KMPaging from 'src/common/components/paging';
+import Search from 'src/common/components/search';
 import SideBar from 'src/common/components/sidebar';
 import Spinner from 'src/common/components/spinner';
 import { Config } from 'src/common/config';
@@ -33,7 +34,7 @@ class KoinList extends React.Component<IKoinListProps, IKoinListState> {
     // tslint:disable-next-line:object-literal-sort-keys
     public readonly state: Readonly<IKoinListState> = {
         pagedData: [], isPageLoading: false, currentPage: 0,
-        pagesCount: 0, pageSize: 80, isPageLoaded: false, globalData: {},
+        pagesCount: 0, pageSize: 100, isPageLoaded: false, globalData: {},
         dropdownOpen: false, dropdownValue: "1h", sortType: "Sort By Rank",
         sortDropdownOpen: false
     };
@@ -282,20 +283,20 @@ class KoinList extends React.Component<IKoinListProps, IKoinListState> {
         // const hide = !this.state.isPageLoaded ? 'd-none' : '';
         return (
             <div id="App">
-                <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
-
+                <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} refreshClick = {this.getAllTicker}/>
                 <div id="page-wrap">
-                    <div className="container-fluid">
+                    <div className="container">
                         <div >
+                            <Search />
                             <div className="row">
                                 {this.state.pagedData.map(koin => (
-                                    <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1" key={koin.id} style={{ marginBottom: 3 }}>
-                                        <div className={"card " + this.getClassBasedOnDropdown(koin.quotes.USD)} style={{ width: 112, height: 63 }}  >
+                                    <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1" key={koin.id} style={{ marginBottom: 2 }}>
+                                        <div className={"card " + this.getClassBasedOnDropdown(koin.quotes.USD)} style={{ width: 92, height: 55 }}  >
                                             <div className="card-body" style={{ padding: "0.25rem" }}>
-                                                <h6 className="card-title"><Link to={`/get/${koin.id}`} className="text-white">{koin.symbol}</Link>
+                                                <h6 className="card-title"  style={{ fontSize: 12, fontWeight: "bold"}}><Link to={`/get/${koin.id}`} className="text-white">{koin.symbol}</Link>
                                                     <span style={{ fontSize: 9, fontWeight: "bold", float: "right" }}>{this.getChangeValueBasedOnDropdown(koin.quotes.USD)}%</span>
                                                 </h6>
-                                                <span className="card-subtitle mb-2">
+                                                <span className="card-subtitle mb-2"  style={{ fontSize: 12, fontWeight: "bold"}}>
                                                     <NumberFormat value={koin.quotes.USD.price.toFixed(4)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                                                 </span>
                                                 {/* <span className = "text-muted">ATH - {koin.quotes.USD.ath_price.toFixed(2)}</span> */}
