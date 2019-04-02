@@ -2,8 +2,8 @@ import axios from "axios";
 import * as React from 'react';
 import NumberFormat from 'react-number-format';
 import { Link } from 'react-router-dom';
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
 import KMPaging from 'src/common/components/paging';
+import SideBar from 'src/common/components/sidebar';
 import Spinner from 'src/common/components/spinner';
 import { Config } from 'src/common/config';
 import { IGlobalData } from 'src/common/IGobalData';
@@ -114,110 +114,110 @@ class KoinList extends React.Component<IKoinListProps, IKoinListState> {
         let data: ITicker[] = [];
         switch (e.currentTarget.textContent.trim()) {
             case "Sort By Rank":
-            data = this.state.pagedData.sort((a, b) => {
-                if (a.rank < b.rank) { return -1; }
-                if (a.rank > b.rank) { return 1; }
-                return 0;
-            });
+                data = this.state.pagedData.sort((a, b) => {
+                    if (a.rank < b.rank) { return -1; }
+                    if (a.rank > b.rank) { return 1; }
+                    return 0;
+                });
                 break;
             case "Sort By $ L2H":
-            data = this.state.pagedData.sort((a, b) => {
-                if (a.quotes.USD.price < b.quotes.USD.price) { return -1; }
-                if (a.quotes.USD.price > b.quotes.USD.price) { return 1; }
-                return 0;
-            });
+                data = this.state.pagedData.sort((a, b) => {
+                    if (a.quotes.USD.price < b.quotes.USD.price) { return -1; }
+                    if (a.quotes.USD.price > b.quotes.USD.price) { return 1; }
+                    return 0;
+                });
                 break;
             case "Sort By $ H2L":
-            data = this.state.pagedData.sort((a, b) => {
-                if (a.quotes.USD.price < b.quotes.USD.price) { return 1; }
-                if (a.quotes.USD.price > b.quotes.USD.price) { return -1; }
-                return 0;
-            });
+                data = this.state.pagedData.sort((a, b) => {
+                    if (a.quotes.USD.price < b.quotes.USD.price) { return 1; }
+                    if (a.quotes.USD.price > b.quotes.USD.price) { return -1; }
+                    return 0;
+                });
                 break;
             case "Sort By % L2H":
-            switch (this.state.dropdownValue.trim()) {
-                case "1h":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_1h < b.quotes.USD.percent_change_1h) { return -1; }
-                    if (a.quotes.USD.percent_change_1h > b.quotes.USD.percent_change_1h) { return 1; }
-                    return 0;
-                });
-                    break;
-                case "12h":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_12h < b.quotes.USD.percent_change_12h) { return -1; }
-                    if (a.quotes.USD.percent_change_12h > b.quotes.USD.percent_change_12h) { return 1; }
-                    return 0;
-                });
-                    break;
-                case "24h":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_24h < b.quotes.USD.percent_change_24h) { return -1; }
-                    if (a.quotes.USD.percent_change_24h > b.quotes.USD.percent_change_24h) { return 1; }
-                    return 0;
-                });
-                    break;
-                case "30d":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_30d < b.quotes.USD.percent_change_30d) { return -1; }
-                    if (a.quotes.USD.percent_change_30d > b.quotes.USD.percent_change_30d) { return 1; }
-                    return 0;
-                });
-                    break;
-                case "1y":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_1y < b.quotes.USD.percent_change_1y) { return -1; }
-                    if (a.quotes.USD.percent_change_1y > b.quotes.USD.percent_change_1y) { return 1; }
-                    return 0;
-                });
-                    break;
-    
-                default:
-                    break;
-            }
-            
+                switch (this.state.dropdownValue.trim()) {
+                    case "1h":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_1h < b.quotes.USD.percent_change_1h) { return -1; }
+                            if (a.quotes.USD.percent_change_1h > b.quotes.USD.percent_change_1h) { return 1; }
+                            return 0;
+                        });
+                        break;
+                    case "12h":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_12h < b.quotes.USD.percent_change_12h) { return -1; }
+                            if (a.quotes.USD.percent_change_12h > b.quotes.USD.percent_change_12h) { return 1; }
+                            return 0;
+                        });
+                        break;
+                    case "24h":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_24h < b.quotes.USD.percent_change_24h) { return -1; }
+                            if (a.quotes.USD.percent_change_24h > b.quotes.USD.percent_change_24h) { return 1; }
+                            return 0;
+                        });
+                        break;
+                    case "30d":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_30d < b.quotes.USD.percent_change_30d) { return -1; }
+                            if (a.quotes.USD.percent_change_30d > b.quotes.USD.percent_change_30d) { return 1; }
+                            return 0;
+                        });
+                        break;
+                    case "1y":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_1y < b.quotes.USD.percent_change_1y) { return -1; }
+                            if (a.quotes.USD.percent_change_1y > b.quotes.USD.percent_change_1y) { return 1; }
+                            return 0;
+                        });
+                        break;
+
+                    default:
+                        break;
+                }
+
                 break;
             case "Sort By % H2L":
-            switch (this.state.dropdownValue.trim()) {
-                case "1h":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_1h < b.quotes.USD.percent_change_1h) { return 1; }
-                    if (a.quotes.USD.percent_change_1h > b.quotes.USD.percent_change_1h) { return -1; }
-                    return 0;
-                });
-                    break;
-                case "12h":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_12h < b.quotes.USD.percent_change_12h) { return 1; }
-                    if (a.quotes.USD.percent_change_12h > b.quotes.USD.percent_change_12h) { return -1; }
-                    return 0;
-                });
-                    break;
-                case "24h":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_24h < b.quotes.USD.percent_change_24h) { return 1; }
-                    if (a.quotes.USD.percent_change_24h > b.quotes.USD.percent_change_24h) { return -1; }
-                    return 0;
-                });
-                    break;
-                case "30d":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_30d < b.quotes.USD.percent_change_30d) { return 1; }
-                    if (a.quotes.USD.percent_change_30d > b.quotes.USD.percent_change_30d) { return -1; }
-                    return 0;
-                });
-                    break;
-                case "1y":
-                data = this.state.pagedData.sort((a, b) => {
-                    if (a.quotes.USD.percent_change_1y < b.quotes.USD.percent_change_1y) { return -1; }
-                    if (a.quotes.USD.percent_change_1y > b.quotes.USD.percent_change_1y) { return 1; }
-                    return 0;
-                });
-                    break;
-    
-                default:
-                    break;
-            }
+                switch (this.state.dropdownValue.trim()) {
+                    case "1h":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_1h < b.quotes.USD.percent_change_1h) { return 1; }
+                            if (a.quotes.USD.percent_change_1h > b.quotes.USD.percent_change_1h) { return -1; }
+                            return 0;
+                        });
+                        break;
+                    case "12h":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_12h < b.quotes.USD.percent_change_12h) { return 1; }
+                            if (a.quotes.USD.percent_change_12h > b.quotes.USD.percent_change_12h) { return -1; }
+                            return 0;
+                        });
+                        break;
+                    case "24h":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_24h < b.quotes.USD.percent_change_24h) { return 1; }
+                            if (a.quotes.USD.percent_change_24h > b.quotes.USD.percent_change_24h) { return -1; }
+                            return 0;
+                        });
+                        break;
+                    case "30d":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_30d < b.quotes.USD.percent_change_30d) { return 1; }
+                            if (a.quotes.USD.percent_change_30d > b.quotes.USD.percent_change_30d) { return -1; }
+                            return 0;
+                        });
+                        break;
+                    case "1y":
+                        data = this.state.pagedData.sort((a, b) => {
+                            if (a.quotes.USD.percent_change_1y < b.quotes.USD.percent_change_1y) { return -1; }
+                            if (a.quotes.USD.percent_change_1y > b.quotes.USD.percent_change_1y) { return 1; }
+                            return 0;
+                        });
+                        break;
+
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
@@ -279,71 +279,34 @@ class KoinList extends React.Component<IKoinListProps, IKoinListState> {
         if (this.state.isPageLoading === true) {
             return (<Spinner />);
         }
-        const hide = !this.state.isPageLoaded ? 'd-none' : '';
+        // const hide = !this.state.isPageLoaded ? 'd-none' : '';
         return (
-            <div className="container-fluid">
-                <ul className="nav justify-content-end">
-                    <li className={"nav-item " + hide}>
-                        <button className={"btn btn-outline-primary " + hide} style={{ marginRight: 5 }}>
-                            <NumberFormat value={this.state.globalData.market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} /></button>
-                    </li>
-                    <li className={"nav-item " + hide}>
-                        <Dropdown isOpen={this.state.dropdownOpen} style={{ marginRight: 5 }} toggle={this.toggle}>
-                            <DropdownToggle caret>
-                                {this.state.dropdownValue}
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem onClick={(e: any) => this.getDropDownValue(e)}>1h</DropdownItem>
-                                <DropdownItem onClick={(e: any) => this.getDropDownValue(e)}>12h</DropdownItem>
-                                <DropdownItem onClick={(e: any) => this.getDropDownValue(e)}>24h</DropdownItem>
-                                <DropdownItem onClick={(e: any) => this.getDropDownValue(e)}>30d</DropdownItem>
-                                <DropdownItem onClick={(e: any) => this.getDropDownValue(e)}>1y</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                    </li>
-                    <li className={"nav-item " + hide}>
-                        <Dropdown isOpen={this.state.sortDropdownOpen} style={{ marginRight: 5 }} toggle={this.sortToggle}>
-                            <DropdownToggle caret>
-                                {this.state.sortType}
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem onClick={(e: any) => this.setSortValue(e)}>Sort By Rank</DropdownItem>
-                                <DropdownItem onClick={(e: any) => this.setSortValue(e)}>Sort By $ L2H</DropdownItem>
-                                <DropdownItem onClick={(e: any) => this.setSortValue(e)}>Sort By $ H2L</DropdownItem>
-                                <DropdownItem onClick={(e: any) => this.setSortValue(e)}>Sort By % L2H</DropdownItem>
-                                <DropdownItem onClick={(e: any) => this.setSortValue(e)}>Sort By % H2L</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                    </li>
-                    <li className={"nav-item " + hide}>
-                        <input type="email" id="exampleInputEmail1" aria-describedby="emailHelp" style={{ height: 38 }} placeholder="XRP" /> <button className={"btn btn-outline-primary "} style={{ marginRight: 5 }}>Search</button>
-                    </li>
-                    <li className={"nav-item " + hide}>
-                        <button className={"btn btn-outline-success "} style={{ marginRight: 5 }}>Fav</button>
-                    </li>
-                    <li className="nav-item">
-                        <button className="btn btn-outline-danger" style={{ marginRight: 5 }} onClick={e => this.getAllTicker()} >Load</button>
-                    </li>
-                </ul>
-                <div style={{ marginTop: 20 }}>
-                    <div className="row">
-                        {this.state.pagedData.map(koin => (
-                            <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1" key={koin.id} style={{ marginBottom: 3 }}>
-                                <div className={"card " + this.getClassBasedOnDropdown(koin.quotes.USD)} style={{ width: 112, height: 63 }}  >
-                                    <div className="card-body" style={{ padding: "0.25rem" }}>
-                                        <h6 className="card-title"><Link to={`/get/${koin.id}`} className="text-white">{koin.symbol}</Link>
-                                            <span style={{ fontSize: 9, fontWeight: "bold", float: "right" }}>{this.getChangeValueBasedOnDropdown(koin.quotes.USD)}%</span>
-                                        </h6>
-                                        <span className="card-subtitle mb-2">
-                                            <NumberFormat value={koin.quotes.USD.price.toFixed(4)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-                                        </span>
-                                        {/* <span className = "text-muted">ATH - {koin.quotes.USD.ath_price.toFixed(2)}</span> */}
+            <div id="App">
+                <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+
+                <div id="page-wrap">
+                    <div className="container-fluid">
+                        <div >
+                            <div className="row">
+                                {this.state.pagedData.map(koin => (
+                                    <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1" key={koin.id} style={{ marginBottom: 3 }}>
+                                        <div className={"card " + this.getClassBasedOnDropdown(koin.quotes.USD)} style={{ width: 112, height: 63 }}  >
+                                            <div className="card-body" style={{ padding: "0.25rem" }}>
+                                                <h6 className="card-title"><Link to={`/get/${koin.id}`} className="text-white">{koin.symbol}</Link>
+                                                    <span style={{ fontSize: 9, fontWeight: "bold", float: "right" }}>{this.getChangeValueBasedOnDropdown(koin.quotes.USD)}%</span>
+                                                </h6>
+                                                <span className="card-subtitle mb-2">
+                                                    <NumberFormat value={koin.quotes.USD.price.toFixed(4)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                                                </span>
+                                                {/* <span className = "text-muted">ATH - {koin.quotes.USD.ath_price.toFixed(2)}</span> */}
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                ))}
                             </div>
-                        ))}
+                            <KMPaging currentPage={this.state.currentPage} pagesCount={this.state.pagesCount} pagingclick={this.handleClick} />
+                        </div>
                     </div>
-                    <KMPaging currentPage= {this.state.currentPage} pagesCount = {this.state.pagesCount} pagingclick = {this.handleClick} />
                 </div>
             </div>
         );
