@@ -33,7 +33,7 @@ class KMPaging extends React.Component<IKMPagingProps, IKMPagingState> {
 
     public render() {
         return (
-            <div className={"pagination-wrapper "} style={{ overflow: "auto", marginTop: 20 }}>
+            <div className={"pagination-wrapper"} style={{ overflow: "auto", marginTop: 20 }}>
                 <Pagination aria-label="Page navigation example">
                     <PaginationItem disabled={this.props.currentPage <= 0}>
                         <PaginationLink

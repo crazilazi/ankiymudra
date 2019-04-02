@@ -7,9 +7,11 @@
     "bootstrap": "^4.2.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-icons": "^3.5.0",
     "react-number-format": "^4.0.6",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
+    "react-sidebar": "^3.0.2",
     "reactstrap": "^7.1.0"
   },
   "scripts": {
@@ -25,7 +27,9 @@
     "@types/node": "^10.12.21",
     "@types/react": "^16.8.1",
     "@types/react-dom": "^16.0.11",
+    "@types/react-icons": "^3.0.0",
     "@types/react-router-dom": "^4.3.1",
+    "@types/react-sidebar": "^3.0.0",
     "@types/reactstrap": "^7.1.2",
     "typescript": "^3.3.1"
   }
