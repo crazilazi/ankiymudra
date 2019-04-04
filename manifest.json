@@ -18,6 +18,7 @@
     "browser_action": {
         "default_icon": "icon/32.png"
     },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "applications": {
         "gecko": {
             "id": "koinmonster.dev.rajeev@ranjan.com"

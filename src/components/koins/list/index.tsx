@@ -27,10 +27,12 @@ export interface IKoinListState {
     sortDropdownOpen: boolean;
     dropdownValue: string;
     sortType: string;
+    // allMudra: ITicker[];
 }
 
 class KoinList extends React.Component<IKoinListProps, IKoinListState> {
-    public koins: ITicker[];
+    public allMudra: ITicker[];
+    public orgAllMudra: ITicker[];
     // tslint:disable-next-line:object-literal-sort-keys
     public readonly state: Readonly<IKoinListState> = {
         pagedData: [], isPageLoading: false, currentPage: 0,
@@ -82,7 +84,9 @@ class KoinList extends React.Component<IKoinListProps, IKoinListState> {
                     if (a.rank > b.rank) { return 1; }
                     return 0;
                 });
-                this.koins = data;
+                this.orgAllMudra = data;
+                this.allMudra = data;
+                // this.setState({ allMudra: data });
                 this.setState({ pagedData: this.getPageddata(0), isPageLoading: false, pagesCount: (data.length / this.state.pageSize), isPageLoaded: true });
             });
     }
@@ -102,7 +106,7 @@ class KoinList extends React.Component<IKoinListProps, IKoinListState> {
     }
 
     public getPageddata = (index: number): ITicker[] => {
-        return this.koins.slice((index * this.state.pageSize), ((index + 1) * this.state.pageSize))
+        return this.allMudra.slice((index * this.state.pageSize), ((index + 1) * this.state.pageSize))
     }
 
     public getDropDownValue = (e: any) => {
@@ -275,28 +279,34 @@ class KoinList extends React.Component<IKoinListProps, IKoinListState> {
         }
         return changeInPercentage;
     }
-
+    public findMudra = (searchTxt: string): void => {
+        const filterMudra: ITicker[] = this.orgAllMudra.filter(x => x.symbol.toLowerCase().startsWith(searchTxt.toLowerCase()) ||
+            x.name.toLowerCase().startsWith(searchTxt.toLowerCase()));
+        this.allMudra = filterMudra;
+        this.setState({ pagedData: this.getPageddata(0), pagesCount: (this.allMudra.length / this.state.pageSize) });
+        console.log(this.state.globalData);
+    }
     public render = () => {
         if (this.state.isPageLoading === true) {
             return (<Spinner />);
         }
-        // const hide = !this.state.isPageLoaded ? 'd-none' : '';
+        const hide = !this.state.isPageLoaded ? 'd-none' : '';
         return (
             <div id="App">
-                <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} refreshClick = {this.getAllTicker}/>
-                <div id="page-wrap">
-                    <div className="container">
+                <SideBar pageWrapId={"page-wrap"} outerContainerId={"App"} refreshClick={this.getAllTicker} />
+                <div id="page-wrap" className={hide}>
+                    <div className="container mt-2">
                         <div >
-                            <Search />
+                            <Search totalMarketCap={this.state.globalData.market_cap_usd} getSearchTxt={this.findMudra} />
                             <div className="row">
                                 {this.state.pagedData.map(koin => (
                                     <div className="col-sm-1 col-md-1 col-lg-1 col-xl-1" key={koin.id} style={{ marginBottom: 2 }}>
                                         <div className={"card " + this.getClassBasedOnDropdown(koin.quotes.USD)} style={{ width: 92, height: 55 }}  >
                                             <div className="card-body" style={{ padding: "0.25rem" }}>
-                                                <h6 className="card-title"  style={{ fontSize: 12, fontWeight: "bold"}}><Link to={`/get/${koin.id}`} className="text-white">{koin.symbol}</Link>
+                                                <h6 className="card-title" style={{ fontSize: 12, fontWeight: "bold" }}><Link to={`/get/${koin.id}`} className="text-white">{koin.symbol}</Link>
                                                     <span style={{ fontSize: 9, fontWeight: "bold", float: "right" }}>{this.getChangeValueBasedOnDropdown(koin.quotes.USD)}%</span>
                                                 </h6>
-                                                <span className="card-subtitle mb-2"  style={{ fontSize: 12, fontWeight: "bold"}}>
+                                                <span className="card-subtitle mb-2" style={{ fontSize: 12, fontWeight: "bold" }}>
                                                     <NumberFormat value={koin.quotes.USD.price.toFixed(4)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                                                 </span>
                                                 {/* <span className = "text-muted">ATH - {koin.quotes.USD.ath_price.toFixed(2)}</span> */}
