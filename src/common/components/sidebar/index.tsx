@@ -32,7 +32,7 @@ class SideBar extends React.Component<ISideBarProps> {
                     >Refresh <FiRefreshCw /></Button>
                 </div> */}
                 <ul className="nav">
-                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#" onClick={(e: any) => this.props.refreshClick(e)}>Link 1</a></li>
                     <li><a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">Link 2 (toggle)</a>
                         <ul className="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">
                             <li><a href="#">Link 2.1</a></li>

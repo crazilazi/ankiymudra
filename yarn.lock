@@ -6946,6 +6946,11 @@ react-scripts-ts@3.1.0:
   optionalDependencies:
     fsevents "^1.1.3"
 
+react-sidemenu@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-sidemenu/-/react-sidemenu-1.1.0.tgz#3c8c9ccd51e38eed99e127a5548a0643b5f82952"
+  integrity sha512-jELlbJ07iKRAcOMgcC4xw3f3wVbpC4XoIbs1cn/zK4ujPfC0ZJnL9oePrXibf+dHIcfeByfiETpjmepvfBz3uA==
+
 react-transition-group@^2.3.1:
   version "2.5.3"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.5.3.tgz#26de363cab19e5c88ae5dbae105c706cf953bb92"
